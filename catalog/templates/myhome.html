@@ -1,0 +1,64 @@
+<head>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+.mySlides {display:none;}
+</style>
+</head>
+
+
+
+
+
+
+
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+  <!-- {% for gb in gbs_cat %}
+    <a href="{{ url_for('showGunsmodels',gbid=gb.id)}}">{{gb.name}}</a><br>
+    {% endfor %} -->
+    {% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	    {% endif %}
+	{% endwith %}
+
+	<!--<div class="text-center">
+		<!-- <h1>Welcome to GamesHub</h1> --
+		<img style="width: 800px; height: 500px; margin: 0; padding: 0; margin-top: 60px" src="https://s3.scoopwhoop.com/dan/defence/feature_2.jpg">
+	</div> -->
+	
+	<div class="w3-content w3-section" style="max-width:1000px">
+  <img class="mySlides" src="http://images.jagran.com/marine-commandos-big.jpg" style="width:80%;border-radius:20px;margin-left:100px">
+  <img class="mySlides" src="https://pubgmobileapkdownload.com/wp-content/uploads/2018/08/PUBG-Wallpaper-for-Laptop-HD.jpg" style="width:80%;border-radius:20px;margin-left:100px">
+  <img class="mySlides" src="https://s3.scoopwhoop.com/dan/defence/feature_2.jpg" style="width:80%;border-radius:20px;margin-left:100px">
+</div>
+
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+</script>
+
+    
+{% endblock content %}
+</div>

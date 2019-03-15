@@ -1,0 +1,47 @@
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	{% endif %}	    
+{% endwith %}
+{% if 'username' in session %}
+<button type="button" class="btn btn-warning" style="margin: 5px 0px 5px 25px;"><a href="{{url_for('addGunsDetails',gbname=gbs.name)}}" style="text-decoration: none;"><strong>Add New Guns</strong></a></button>
+
+{% endif %}
+<div class="row" style="margin: 10px;" >
+{% for gbe in gbes %}
+
+	<div class="col-sm-4 text-center" style="border-radius:50px ">
+		<div class="panel panel-primary" >
+			<div class="panel-heading" style="background-color:#79533d">
+				<h4>{{ gbe.gunsname }}</h4>
+			</div>
+			<div class="panel-body text-center" style="background-color:#f8e28f">
+				<table>
+					<tr><th>GUNSNAME</th><td>:</td><td><h5>{{ gbe.gunsname }}</h5></td></tr>
+					<tr><th>LAUNCHYEAR</th><td>:</td><td><h5>{{ gbe.launchyear }}</h5></td></tr>
+					<tr><th>KILLRATINGS</th><td>:</td><td><h5>{{ gbe.killrating }}</h5></td></tr>
+					<tr><th>GUNSTYPE</th><td>:</td><td><h5>{{ gbe.gunstype }}</h5></td></tr>
+					<tr><th>PRICE</th><td>:</td><td><h5>{{ gbe.price }}</h5></td></tr>
+				</table>
+			</div>
+			{% if 'username' in session %}
+			<div class="panel-footer" style="background-color:#fbf1fb">
+					<button type="button" class="btn btn-info"><a href="{{ url_for('editGuns',gbid=gbs.id,gbename=gbe.gunsname) }}"style="text-decoration: none;color:white;">EDIT</a></button>
+					<button type="button" class="btn btn-danger"><a href="{{ url_for('deleteGuns',gbid=gbs.id,gbename=gbe.gunsname)}}"style="text-decoration: none;color:white;">DELETE</a></button>
+			</div>
+			{% endif %}	
+			
+		</div>
+	</div>
+{% endfor %}
+</div>
+{% endblock content %}
+</div>
